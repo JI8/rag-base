@@ -4,6 +4,7 @@ create extension if not exists vector;
 -- Drop existing tables if they exist
 drop table if exists chunks;
 drop table if exists documents;
+drop table if exists settings;
 
 -- Documents table
 create table documents (
@@ -14,6 +15,12 @@ create table documents (
   created_at timestamp with time zone default timezone('utc'::text, now()) not null,
   updated_at timestamp with time zone default timezone('utc'::text, now()) not null,
   status text default 'processing' not null -- 'processing', 'completed', 'error'
+);
+
+-- Simple settings table for storing branding configuration
+create table settings (
+  key text primary key,
+  value text
 );
 
 -- Chunks table with vector embeddings
