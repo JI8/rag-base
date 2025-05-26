@@ -7,6 +7,7 @@ drop trigger if exists update_documents_updated_at on documents;
 drop trigger if exists update_chunks_updated_at on chunks;
 drop table if exists chunks cascade;
 drop table if exists documents cascade;
+drop table if exists settings cascade;
 drop type if exists document_status cascade;
 drop type if exists document_visibility cascade;
 
@@ -26,6 +27,12 @@ create table if not exists collections (
     metadata jsonb default '{}',
     created_at timestamptz not null default now(),
     updated_at timestamptz not null default now()
+);
+
+-- Settings table for application configuration
+create table settings (
+    key text primary key,
+    value text
 );
 
 -- Create documents table
